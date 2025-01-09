@@ -7,10 +7,8 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "sqlite",
   }),
-  trustedOrigins: [
-    "https://annualdiary.onrender.com/",
-    "http://localhost:3000",
-  ],
+
+  trustedOrigins: ["https://annualdiary.onrender.com", "http://localhost:3000"],
   account: {
     accountLinking: {
       enabled: true,
