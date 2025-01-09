@@ -22,7 +22,6 @@ export function Login() {
     setIsLoading(true);
     const { error } = await authClient.signIn.social({
       provider: "google",
-      callbackURL: process.env.NEXT_PUBLIC_BASE_URL,
     });
 
     if (error) {
