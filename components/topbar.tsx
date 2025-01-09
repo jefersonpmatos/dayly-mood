@@ -8,6 +8,12 @@ import { authClient } from "@/lib/auth-client";
 
 export const Topbar = () => {
   const session = authClient.useSession();
+
+  const logout = async () => {
+    await authClient.signOut().then(() => {
+      window.location.href = "/";
+    });
+  };
   return (
     <div className="w-full bg-gray-700 text-white shadow-lg border border-border py-1 px-10 md:px-4">
       <div className=" max-w-screen-lg mx-auto flex items-center justify-between">
@@ -45,15 +51,7 @@ export const Topbar = () => {
 
         <div className=" hidden md:flex gap-2 ">
           <HelpButton />
-          {session.data && (
-            <Button
-              onClick={() => {
-                authClient.signOut();
-              }}
-            >
-              Logout
-            </Button>
-          )}
+          {session.data && <Button onClick={logout}>Logout</Button>}
 
           {!session.data && <Login />}
         </div>

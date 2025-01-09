@@ -67,11 +67,38 @@ export async function createEntry({
   }
 }
 
+export async function getUserEntries() {
+  const session = await auth.api.getSession({
+    headers: headers(),
+  });
+  if (!session?.user.id) {
+    return [];
+  }
+
+  try {
+    const entries = await prisma.entry.findMany({
+      where: {
+        userId: session?.user.id,
+      },
+      orderBy: {
+        date: "asc",
+      },
+    });
+    return entries;
+  } catch (error) {
+    console.error("Error fetching entries:", error);
+    throw new Error("Failed to fetch entries");
+  }
+}
 // Função para obter entradas por usuário e ano
 export async function getEntriesByYear(year: number) {
   const session = await auth.api.getSession({
     headers: headers(),
   });
+
+  if (!session?.user.id) {
+    return [];
+  }
 
   try {
     const entries = await prisma.entry.findMany({

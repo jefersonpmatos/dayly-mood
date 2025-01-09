@@ -6,21 +6,11 @@ import { getMonthData } from "@/lib/utils";
 
 import { Calendar } from "@/components/calendar";
 import { Topbar } from "@/components/topbar";
-import { authClient } from "@/lib/auth-client";
-import { Loader2 } from "lucide-react";
 import { useEntries } from "@/lib/queries";
 
 export default function Home() {
   const [currentDate] = useState(new Date());
-  const { isPending } = authClient.useSession();
   const { data: entries } = useEntries();
-
-  if (isPending)
-    return (
-      <div className="backdrop-blur-lg bg-bg h-screen w-full flex items-center justify-center font-base">
-        <Loader2 className="animate-spin" />
-      </div>
-    );
 
   return (
     <div className="min-h-screen bg-bg space-y-8 pb-4">
