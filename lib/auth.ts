@@ -7,6 +7,13 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "sqlite",
   }),
+  account: {
+    accountLinking: {
+      enabled: true,
+      trustedProviders: ["google"],
+    },
+  },
+
   emailAndPassword: {
     enabled: true,
   },
