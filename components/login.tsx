@@ -12,7 +12,7 @@ import {
 import { toast } from "@/hooks/use-toast";
 
 import { authClient } from "@/lib/auth-client";
-import { Calendar1, Loader2 } from "lucide-react";
+import { Calendar1 } from "lucide-react";
 import { useState } from "react";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
