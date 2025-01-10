@@ -8,14 +8,17 @@ export const auth = betterAuth({
     provider: "postgresql",
   }),
 
-  trustedOrigins: ["https://annualdiary.onrender.com", "http://localhost:3000"],
+  trustedOrigins: [
+    "https://annualdiary.onrender.com",
+    "http://localhost:3000",
+    "https://annualdiary.vercel.app",
+  ],
   account: {
     accountLinking: {
       enabled: true,
       trustedProviders: ["google"],
     },
   },
-
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: false,

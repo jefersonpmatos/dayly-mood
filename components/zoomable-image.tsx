@@ -44,7 +44,8 @@ export const ZoomableImage = ({ images }: ImageCarouselProps) => {
             <Image
               src={image}
               alt={image}
-              fill
+              width={1200}
+              height={800}
               className="object-cover transition-transform group-hover:scale-110"
             />
           </button>
@@ -62,7 +63,6 @@ export const ZoomableImage = ({ images }: ImageCarouselProps) => {
                       <Image
                         src={image}
                         alt={image}
-                        fill
                         width={1200}
                         height={800}
                         className="max-h-screen w-auto object-contain rounded-base"

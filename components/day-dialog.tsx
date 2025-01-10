@@ -150,7 +150,7 @@ export const DayDialog: React.FC<DayDialogProps> = ({ date, entry }) => {
 
       toast({
         title: "Entry created 🚀",
-        description: "Back tomorrow and keep tracking your days",
+        description: "Keep tracking your days",
       });
 
       mutateEntries();

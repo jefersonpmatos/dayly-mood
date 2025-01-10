@@ -61,7 +61,7 @@ export const NoteEditor = ({
       <EditorContent
         editor={editor}
         className={cn(
-          "bg-bg text-text text-sm",
+          "bg-bg text-text text-sm max-h-96 overflow-y-auto min-h-28",
           !reandOnly && "border border-border rounded-t-base "
         )}
       />
