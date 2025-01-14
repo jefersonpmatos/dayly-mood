@@ -9,17 +9,19 @@ export function cn(...inputs: ClassValue[]) {
 export function getMonthData(
   month: number,
   year: number,
-  entries: Entry[] = [] // Array de entradas
+  entries: Entry[] = []
 ) {
   const firstDay = new Date(year, month, 1);
+  firstDay.setHours(0, 0, 0, 0); // Elimina o deslocamento de horário
   const lastDay = new Date(year, month + 1, 0);
+  lastDay.setHours(0, 0, 0, 0);
+
   const days: {
     date: Date;
     isCurrentMonth: boolean;
     entry?: Entry;
   }[] = [];
 
-  // Função auxiliar para encontrar a entrada correspondente a uma data
   const findEntryByDate = (date: Date) => {
     return entries.find(
       (entry) =>
@@ -29,20 +31,22 @@ export function getMonthData(
     );
   };
 
-  // Adiciona os dias do mês anterior
-  const firstDayOfWeek = firstDay.getDay();
-  for (let i = 1; i <= firstDayOfWeek; i++) {
-    const date = new Date(year, month, -i + 1);
-    days.unshift({
+  // Dias do mês anterior
+  const firstDayOfWeek = (firstDay.getDay() + 6) % 7; // Ajuste para iniciar na segunda-feira
+  for (let i = firstDayOfWeek; i > 0; i--) {
+    const date = new Date(year, month, 1 - i);
+    date.setHours(0, 0, 0, 0); // Normaliza o horário
+    days.push({
       date,
       isCurrentMonth: false,
       entry: findEntryByDate(date),
     });
   }
 
-  // Adiciona os dias do mês atual
+  // Dias do mês atual
   for (let i = 1; i <= lastDay.getDate(); i++) {
     const date = new Date(year, month, i);
+    date.setHours(0, 0, 0, 0); // Normaliza o horário
     days.push({
       date,
       isCurrentMonth: true,
@@ -50,10 +54,11 @@ export function getMonthData(
     });
   }
 
-  // Adiciona os dias do próximo mês
-  const remainingDays = 42 - days.length; // Garantir um calendário de 6 linhas (6x7 = 42 dias)
+  // Dias do próximo mês
+  const remainingDays = 42 - days.length;
   for (let i = 1; i <= remainingDays; i++) {
     const date = new Date(year, month + 1, i);
+    date.setHours(0, 0, 0, 0); // Normaliza o horário
     days.push({
       date,
       isCurrentMonth: false,
